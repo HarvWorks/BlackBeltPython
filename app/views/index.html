@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>LoginAndReg</title>
+        <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+        <script   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/static/index.css" type="text/css">
+        <script>
+            $( function() {
+                $( "#birth_date" ).datepicker();
+            } );
+        </script>
+    </head>
+    <body>
+        <div id="box">
+            <h1>Register:</h1>
+            <ul class="text" id= "right-text">
+                <li>Email:</li>
+                <li>First Name:</li>
+                <li>Last Name:</li>
+                <li>Alias:</li>
+                <li>Password:</li>
+                <li>Confirm Password:</li>
+                <li>Date of Birth:</li>
+            </ul>
+            <form action='/process' method='POST'>
+                <input type="hidden" name="type" value="register">
+                <ul>
+                    <li><input type="text" name="email" value = {{get_flashed_messages(category_filter=["email"])[0]}}></li>
+                    <li><input type="text" name="first_name"value = {{get_flashed_messages(category_filter=["first_name"])[0]}}></li>
+                    <li><input type="text" name="last_name"value = {{get_flashed_messages(category_filter=["last_name"])[0]}}></li>
+                    <li><input type="text" name="alias"value = {{get_flashed_messages(category_filter=["alias"])[0]}}></li>
+                    <li><input type="password" name="password"></li>
+                    <li><input type="password" name="confirm"></li>
+                    <li><input type="text" name="birth_date" id="birth_date"></li>
+                    <li><input type="submit" value="Register" class="button"></li>
+                </ul>
+            </form>
+            <ul class="text">
+                <div class="red">
+                    <li>{{get_flashed_messages(category_filter=["email_err"])[0]}}&nbsp</li>
+                    <li>{{get_flashed_messages(category_filter=["first_name_err"])[0]}}&nbsp</li>
+                    <li>{{get_flashed_messages(category_filter=["last_name_err"])[0]}}&nbsp</li>
+                    <li>{{get_flashed_messages(category_filter=["alias_err"])[0]}}&nbsp</li>
+                    <li>{{get_flashed_messages(category_filter=["password_err"])[0]}}&nbsp</li>
+                    <li>{{get_flashed_messages(category_filter=["confirm_err"])[0]}}&nbsp</li>
+                    <li>{{get_flashed_messages(category_filter=["birth_date_err"])[0]}}&nbsp</li>
+                </div>
+            </ul>
+            <h1>Login:</h1>
+            <ul class="text" id= "right-text">
+                <li>Email:</li>
+                <li>Password:</li>
+            </ul>
+            <form action='/process' method='POST'>
+                <input type="hidden" name="type" value="login">
+                <ul>
+                    <li><input type="text" name="email" value = {{get_flashed_messages(category_filter=["email"])[0]}}></li>
+                    <li><input type="password" name="password"></li>
+                    <li><input type="submit" value="Login" class="button"></li>
+                </ul>
+            </form>
+            <ul class="text">
+                <div class="red">
+                    <li>{{get_flashed_messages(category_filter=["email_login_err"])[0]}} &nbsp</li>
+                    <li>{{get_flashed_messages(category_filter=["password_login_err"])[0]}}&nbsp</li>
+                </div>
+            </ul>
+        </div>
+    </body>
+</html>

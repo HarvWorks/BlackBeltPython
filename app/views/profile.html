@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>User Form Validation</title>
+        <link rel="stylesheet" href="/static/index.css" type="text/css">
+    </head>
+    <body>
+        {% if session['user_id'] %}
+        <div id="box">
+            <div id="nav">
+                <a href="/friends">Home</a>
+                <form action="/logout" method="get">
+                    <input type="submit" value="Logout">
+                </form>
+            </div>
+            <h2>{{user[0]['alias']}}'s Profile</h2>
+            <li>Name: {{user[0]['first_name']}} {{user[0]['last_name']}}</li>
+            <li>Email: {{user[0]['email']}}</li>
+            <li>Birth Date: {{user[0]['date_birth']}}</li>
+        </div>
+        {% else %}
+            <p>
+                No Hacking!
+            </p>
+        {% endif %}
+    </body>
+</html>

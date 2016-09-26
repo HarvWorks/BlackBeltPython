@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <title>User Form Validation</title>
+        <link rel="stylesheet" href="/static/index.css" type="text/css">
+    </head>
+    <body>
+        {% if session['user_id'] %}
+        <div id="box">
+            <div id="nav">
+                <h2>Hello, {{session['alias']}}:</h2>
+                {{get_flashed_messages(category_filter=["sucess"])[0]}}
+                <form action="/logout" method="get">
+                    <input type="submit" value="Logout">
+                </form>
+            </div>
+            <h2>Friends</h2>
+            <div id="friends">
+                {% if friends %}
+                    <table>
+                        <thead>
+                            <th>
+                                Alias
+                            </th>
+                            <th>
+                                Profile
+                            </th>
+                            <th>
+                                UnFriend
+                            </th>
+                            <th>
+                                Friends Since
+                            </th>
+                        </thead>
+                        <tbody>
+                            {% for friend in friends %}
+                                <tr>
+                                    <td>
+                                        {{friend['alias']}}
+                                    </td>
+                                    <td>
+                                        <a href="/user/{{friend['id']}}">Profile</a>
+                                    </td>
+                                    <td>
+                                        <form class="friend" action="/unfriend/{{friend['id']}}" method="GET">
+                                            <input type="submit" value="UnFriend">
+                                        </form>
+                                    </td>
+                                    <td>
+                                       {{friend['created_at']}}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>
+                        There be chickens! You have no friends!
+                    </p>
+                {% endif %}
+            </div>
+            <p>
+                &nbsp
+            </p>
+            <h2>Users</h2>
+            <div id="users">
+                <table>
+                    <thead>
+                        <th>
+                            Alias
+                        </th>
+                        <th>
+                            Friend
+                        </th>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>
+                                    <a href="/user/{{user['id']}}">{{user['alias']}}</a>
+                                </td>
+                                <td>
+                                    <form class="friend" action="/friend/{{user['id']}}" method="GET">
+                                        <input type="submit" value="Friend">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+            <p>
+                No Hacking!
+            </p>
+        {% endif %}
+    </body>
+</html>
