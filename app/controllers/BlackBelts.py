@@ -84,5 +84,5 @@ class BlackBelts(Controller):
     def unfriend(self, user_id):
         if not 'user_id' in session:
             return redirect('/')
-        self.models['BlackBelt'].unfriendfriend(user_id)
+        self.models['BlackBelt'].unfriend(user_id)
         return redirect('/friends')
